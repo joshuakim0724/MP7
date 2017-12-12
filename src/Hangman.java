@@ -39,6 +39,9 @@ public class Hangman {
 
 			System.out.println("Enter your letter guess (" + tries + " remaining)" + ":");
 			char letterGuess = scan.next().charAt(0);
+			String tempWord = letterGuess + "";
+			tempWord.toLowerCase();
+			letterGuess = tempWord.charAt(0);
 			for (int j = 0; j < charWord.length; j ++) {
 				if (charWord[j] == letterGuess) {
 					guessWord[j] = letterGuess;
