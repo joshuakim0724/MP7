@@ -4,12 +4,16 @@ public class TicTacToe {
     private static char board[][];
     private static char currentPlayerMark = 'X';
     private static boolean isFinished = false;
-   
+    private static int count = 0;
     public static void main(String[] args) {
         TicTacToe tic = new TicTacToe();
         Scanner scan = new Scanner(System.in);
         initializeBoard();
         while (isFinished == false) {
+            if (count >= 9) {
+                System.out.println("Tie, no one wins");
+                return;
+            }
             System.out.println("Player one, enter which row you want to place your mark from 1 to 3");
             int row1 = scan.nextInt() - 1;
             System.out.println("Player one, enter which column you want to place your mark from 1 to 3");
@@ -18,10 +22,16 @@ public class TicTacToe {
             initializeBoard();
             isFinished = boardIsFull();
             isFinished = hasWon();
+            count++;
             changePlayer();
             System.out.println();
             if (isFinished == true) {
                 System.out.println("Player one has won");
+                return;
+            }
+           
+            if (count >= 9) {
+                System.out.println("Tie, no one wins");
                 return;
             }
             System.out.println("Player two, enter which row you want to place your mark from 1 to 3");
@@ -32,6 +42,7 @@ public class TicTacToe {
             initializeBoard();
             isFinished = boardIsFull();
             isFinished = hasWon();
+            count++;
             changePlayer();
             System.out.println();
         }
@@ -71,7 +82,7 @@ public class TicTacToe {
         boolean isFull = true;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (board[i][j] == '-') {
+                if (board[i][j] == '_') {
                     isFull = false;
                 }
             }
@@ -135,8 +146,7 @@ public class TicTacToe {
     }
    
     public static boolean placeMark(int row, int col) {
-//      if ((row > 0) && (row <= 3)) {
-//          if ((col > 0) && (col <= 3)) {
+ 
                 if (board[row][col] == '_') {
                     board[row][col] = currentPlayerMark;
                 }
